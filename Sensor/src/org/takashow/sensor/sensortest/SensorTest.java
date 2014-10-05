@@ -135,7 +135,7 @@ public class SensorTest extends Activity implements SensorEventListener {
 	}
 	@Override
 	protected void onStop() {
-		// 程序终止时取消注册传感器监听器.opppppppp
+		// 程序终止时取消注册传感器监听器
 		mSensorManager.unregisterListener(this);
 		super.onStop();
 	}
