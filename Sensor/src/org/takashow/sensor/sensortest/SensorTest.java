@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class SensorTest extends Activity implements SensorEventListener {
-	
-	// ¶¨ÒåSensor¹ÜÀíÆ÷
+
+	// å®šä¹‰Sensorç®¡ç†å™¨
 	private SensorManager mSensorManager;
 	TextView etOrientation;
 	TextView etMagnetic;
@@ -22,34 +22,34 @@ public class SensorTest extends Activity implements SensorEventListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sensor_test);
-		// »ñÈ¡½çÃæÉÏµÄTextView×é¼ş
+		// è·å–ç•Œé¢ä¸Šçš„TextViewç»„ä»¶
 		etOrientation = (TextView) findViewById(R.id.etOrientation);
-		etMagnetic = (TextView) findViewById(R.id.etMagnetic); 
+		etMagnetic = (TextView) findViewById(R.id.etMagnetic);
 		etTemperature = (TextView) findViewById(R.id.etTemperature);
 		etLight = (TextView) findViewById(R.id.etLight);
 		etPressure = (TextView) findViewById(R.id.etPressure);
-		// »ñÈ¡´«¸ĞÆ÷¹ÜÀí·şÎñ
-		mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE); // ¢Ù
+		// è·å–ä¼ æ„Ÿå™¨ç®¡ç†æœåŠ¡
+		mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE); // â‘ 
 	}
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// ÎªÏµÍ³·½Ïò´«¸ĞÆ÷×¢²á¼àÌıÆ÷
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), 
+		// ä¸ºç³»ç»Ÿæ–¹å‘ä¼ æ„Ÿå™¨æ³¨å†Œç›‘å¬å™¨
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
 				SensorManager.SENSOR_DELAY_GAME);
-		// »ñµÃÏµÍ³·½ÏòµÄĞÂ·½·¨
+		// è·å¾—ç³»ç»Ÿæ–¹å‘çš„æ–°æ–¹æ³•
 //		mSensorManager.getOrientation(R, values);
-		// ÎªÏµÍ³´Å³¡´«¸ĞÆ÷×¢²á¼àÌıÆ÷
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), 
+		// ä¸ºç³»ç»Ÿç£åœºä¼ æ„Ÿå™¨æ³¨å†Œç›‘å¬å™¨
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
 				SensorManager.SENSOR_DELAY_GAME);
-		// ÎªÏµÍ³ÎÂ¶È´«¸ĞÆ÷×¢²á¼àÌıÆ÷
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE), 
+		// ä¸ºç³»ç»Ÿæ¸©åº¦ä¼ æ„Ÿå™¨æ³¨å†Œç›‘å¬å™¨
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE),
 				SensorManager.SENSOR_DELAY_GAME);
-		// ÎªÏµÍ³¹âÏß´«¸ĞÆ÷×¢²á¼àÌıÆ÷
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT), 
+		// ä¸ºç³»ç»Ÿå…‰çº¿ä¼ æ„Ÿå™¨æ³¨å†Œç›‘å¬å™¨
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT),
 				SensorManager.SENSOR_DELAY_GAME);
-		// ÎªÏµÍ³Ñ¹Á¦´«¸ĞÆ÷×¢²á¼àÌıÆ÷
-		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE), 
+		// ä¸ºç³»ç»Ÿå‹åŠ›ä¼ æ„Ÿå™¨æ³¨å†Œç›‘å¬å™¨
+		mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE),
 				SensorManager.SENSOR_DELAY_GAME);
 	}
 
@@ -69,73 +69,73 @@ public class SensorTest extends Activity implements SensorEventListener {
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		float[] values = event.values;
-		// »ñÈ¡´¥·¢eventµÄ´«¸ĞÆ÷ÀàĞÍ
+		// è·å–è§¦å‘eventçš„ä¼ æ„Ÿå™¨ç±»å‹
 		int sensorType = event.sensor.getType();
 		StringBuilder sb = null;
-		// ÅĞ¶ÏÊÇÄÄ¸ö´«¸ĞÆ÷·¢Éú±ä»¯
+		// åˆ¤æ–­æ˜¯å“ªä¸ªä¼ æ„Ÿå™¨å‘ç”Ÿå˜åŒ–
 		switch (sensorType) {
-		// ·½Ïò´«¸ĞÆ÷
-		case Sensor.TYPE_ORIENTATION:
-			 sb = new StringBuilder(); 
-			 sb.append("ÈÆZÖá×ª¹ıµÄ½Ç¶È£º");
-			 sb.append(values[0]);
-			 sb.append("\nÈÆXÖá×ª¹ıµÄ½Ç¶È£º");
-			 sb.append(values[1]);
-			 sb.append("\nÈÆYÖá×ª¹ıµÄ½Ç¶È£º");
-			 sb.append(values[2]);
-			 etOrientation.setText(sb.toString());
-			break;
-		// ´Å³¡´«¸ĞÆ÷	
-		case Sensor.TYPE_MAGNETIC_FIELD:
-			 sb = new StringBuilder(); 
-			 sb.append("XÖá´Å¸ĞÓ¦Ç¿¶È£º");
-			 sb.append(values[0]);
-			 sb.append("\nYÖá´Å¸ĞÓ¦Ç¿¶È£º");
-			 sb.append(values[1]);
-			 sb.append("\nZÖá´Å¸ĞÓ¦Ç¿¶È£º");
-			 sb.append(values[2]);	
-			 etMagnetic.setText(sb.toString());
-			 break;
-		// ÎÂ¶È´«¸ĞÆ÷
-		case Sensor.TYPE_AMBIENT_TEMPERATURE:
-			 sb = new StringBuilder(); 
-			 sb.append("µ±Ç°ÎÂ¶ÈÎª£º");
-			 sb.append(values[0]);
-			 etTemperature.setText(sb.toString());
-			break;
-		// ¹âÏß´«¸ĞÆ÷
-		case Sensor.TYPE_LIGHT:
-			 sb = new StringBuilder(); 
-			 sb.append("µ±Ç°¹âÏßÇ¿¶ÈÎª£º");
-			 sb.append(values[0]);
-			 etLight.setText(sb.toString());
-			break;
-		// Ñ¹Á¦´«¸ĞÆ÷	
-		case Sensor.TYPE_PRESSURE:
-			 sb = new StringBuilder(); 
-			 sb.append("µ±Ç°Ñ¹Á¦Îª£º");
-			 sb.append(values[0]);
-			 etPressure.setText(sb.toString());
-			break;
+			// æ–¹å‘ä¼ æ„Ÿå™¨
+			case Sensor.TYPE_ORIENTATION:
+				sb = new StringBuilder();
+				sb.append("ç»•Zè½´è½¬è¿‡çš„è§’åº¦ï¼š");
+				sb.append(values[0]);
+				sb.append("\nç»•Xè½´è½¬è¿‡çš„è§’åº¦ï¼š");
+				sb.append(values[1]);
+				sb.append("\nç»•Yè½´è½¬è¿‡çš„è§’åº¦ï¼š");
+				sb.append(values[2]);
+				etOrientation.setText(sb.toString());
+				break;
+			// ç£åœºä¼ æ„Ÿå™¨
+			case Sensor.TYPE_MAGNETIC_FIELD:
+				sb = new StringBuilder();
+				sb.append("Xè½´ç£æ„Ÿåº”å¼ºåº¦ï¼š");
+				sb.append(values[0]);
+				sb.append("\nYè½´ç£æ„Ÿåº”å¼ºåº¦ï¼š");
+				sb.append(values[1]);
+				sb.append("\nZè½´ç£æ„Ÿåº”å¼ºåº¦ï¼š");
+				sb.append(values[2]);
+				etMagnetic.setText(sb.toString());
+				break;
+			// æ¸©åº¦ä¼ æ„Ÿå™¨
+			case Sensor.TYPE_AMBIENT_TEMPERATURE:
+				sb = new StringBuilder();
+				sb.append("å½“å‰æ¸©åº¦ä¸ºï¼š");
+				sb.append(values[0]);
+				etTemperature.setText(sb.toString());
+				break;
+			// å…‰çº¿ä¼ æ„Ÿå™¨
+			case Sensor.TYPE_LIGHT:
+				sb = new StringBuilder();
+				sb.append("å½“å‰å…‰çº¿å¼ºåº¦ä¸ºï¼š");
+				sb.append(values[0]);
+				etLight.setText(sb.toString());
+				break;
+			// å‹åŠ›ä¼ æ„Ÿå™¨
+			case Sensor.TYPE_PRESSURE:
+				sb = new StringBuilder();
+				sb.append("å½“å‰å‹åŠ›ä¸ºï¼š");
+				sb.append(values[0]);
+				etPressure.setText(sb.toString());
+				break;
 		}
-		
+
 	}
 
 	@Override
-	// ´«¸ĞÆ÷¾«¶È¸Ä±äÊ±¼ä»Øµ÷·½·¨
+	// ä¼ æ„Ÿå™¨ç²¾åº¦æ”¹å˜æ—¶é—´å›è°ƒæ–¹æ³•
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	protected void onPause() {
-		// ³ÌĞòÔİÍ£Ê±È¡Ïû×¢²á´«¸ĞÆ÷¼àÌıÆ÷
+		// ç¨‹åºæš‚åœæ—¶å–æ¶ˆæ³¨å†Œä¼ æ„Ÿå™¨ç›‘å¬å™¨
 		mSensorManager.unregisterListener(this);
 		super.onPause();
 	}
 	@Override
 	protected void onStop() {
-		// ³ÌĞòÖÕÖ¹Ê±È¡Ïû×¢²á´«¸ĞÆ÷¼àÌıÆ÷
+		// ç¨‹åºç»ˆæ­¢æ—¶å–æ¶ˆæ³¨å†Œä¼ æ„Ÿå™¨ç›‘å¬å™¨
 		mSensorManager.unregisterListener(this);
 		super.onStop();
 	}
